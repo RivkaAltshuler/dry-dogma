@@ -46,10 +46,10 @@ To operationalize an error-correcting runtime without falling into the pitfalls 
   Traditional constraint satisfaction systems operate as monolithic, batch solvers that take over execution and obscure local state transitions. In contrast, RIVar operates over decentralized, event-driven streams, allowing flexible **merge policies** that negotiate conflicts directly with the user or agent in real time.
 
 ### The Three Operational Modes
-When overlapping inputs are introduced through this model, the runtime behaves across three deterministic states[cite: 2]:
-1. **Propagation (Partial Input):** Deriving missing state automatically[cite: 2].
-2. **Parity Check (Consistent Redundancy):** Confirming mutual agreement across overlapping constraints[cite: 2].
-3. **Structured Rejection (Conflict Isolation):** Trapping contradictions and returning actionable diagnostic feedback without breaking the active stream[cite: 2].
+When overlapping inputs are introduced through this model, the runtime behaves across three deterministic states:
+1. **Propagation (Partial Input):** Deriving missing state automatically.
+2. **Parity Check (Consistent Redundancy):** Confirming mutual agreement across overlapping constraints.
+3. **Structured Rejection (Conflict Isolation):** Trapping contradictions and returning actionable diagnostic feedback without breaking the active stream.
 
 ## Foundations
 
