@@ -31,16 +31,25 @@ Communication between natural-language systems (whether humans or generative AI 
 
 In information theory, reliable transmission across a noisy medium requires intentional redundancy (such as parity bits and checksums) paired with an error-correcting protocol. Applying this principle to software architecture, intentional redundancy provides the overlapping signals necessary to detect misunderstandings, trace semantic drift, and guide automated recovery.
 
-### 3. Intentional Redundancy via the RIVar Computational Model
-To operationalize error-correcting channels without falling into the traps of traditional paradigms, we leverage the **RIVar** computational model:
+### 3. Intentional Redundancy as a Runtime Protocol
+Instead of treating redundancy as duplicate data to be eliminated, we approach it as a first-class architectural protocol. By designing runtimes that can accept multiple, simultaneous declarations of state, we turn overlapping inputs into continuous parity checks. 
 
-* **Beyond Traditional FRP (Cycle-Safe Invariant Dependencies):** Conventional Functional Reactive Programming mandates Directed Acyclic Graphs (DAGs) and single-assignment semantics. RIVar's constructive assignment natively accommodates multi-directional, cyclic dependencies and evaluates conflicting specifications deterministically rather than terminating the reactive stream.
-* **Beyond Classical Constraint Solvers (Event-Driven Merge Policies):** While constraint satisfaction systems solve global equations, they often function as monolithic, batch-oriented solvers that obscure local state transitions. RIVar operates over decentralized reactive event streams, enabling flexible, localized **merge strategies** that can dynamically evaluate conflicts and negotiate resolutions directly with the user or agent.
+This shifts the responsibility of consistency from manual developer discipline or rigid user inputs to an automated runtime protocol—one capable of propagation, validation, and structured conflict resolution without crashing the execution environment.
 
-This mechanism powers three deterministic operational modes:
-1. **Propagation (Partial Specification):** Derives missing state across interdependent relationships when a partial update is provided.
-2. **Parity Verification (Redundant Specification):** Evaluates overlapping inputs against domain invariants, confirming convergence when specifications align.
-3. **Structured Rejection & Self-Healing (Conflict Detection):** Isolates contradictory constraints without discarding existing state, returning an actionable diagnostic explanation to the user or agent for resolution.
+## Enabling the Protocol: The RIVar Computational Model
+
+To operationalize an error-correcting runtime without falling into the pitfalls of existing paradigms, we build upon the **RIVar** computational model:
+
+* **Why not traditional Reactive Programming (FRP)?**  
+  Conventional dataflow engines enforce strict Directed Acyclic Graphs (DAGs) and single-source updates[cite: 1]. Circular dependencies or competing inputs cause infinite loops or stream crashes. RIVar introduces *constructive assignment*, natively supporting cyclic, multi-directional dependencies and resolving them deterministically.
+* **Why not classical Constraint Solvers?**  
+  Traditional constraint satisfaction systems operate as monolithic, batch solvers that take over execution and obscure local state transitions. In contrast, RIVar operates over decentralized, event-driven streams, allowing flexible **merge policies** that negotiate conflicts directly with the user or agent in real time.
+
+### The Three Operational Modes
+When overlapping inputs are introduced through this model, the runtime behaves across three deterministic states[cite: 2]:
+1. **Propagation (Partial Input):** Deriving missing state automatically[cite: 2].
+2. **Parity Check (Consistent Redundancy):** Confirming mutual agreement across overlapping constraints[cite: 2].
+3. **Structured Rejection (Conflict Isolation):** Trapping contradictions and returning actionable diagnostic feedback without breaking the active stream[cite: 2].
 
 ## Foundations
 
