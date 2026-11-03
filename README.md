@@ -41,7 +41,7 @@ This shifts the responsibility of consistency from manual developer discipline o
 To operationalize an error-correcting runtime without falling into the pitfalls of existing paradigms, we build upon the **RIVar** computational model:
 
 * **Why not traditional Reactive Programming (FRP)?**  
-  Conventional dataflow engines enforce strict Directed Acyclic Graphs (DAGs) and single-source updates[cite: 1]. Circular dependencies or competing inputs cause infinite loops or stream crashes. RIVar introduces *constructive assignment*, natively supporting cyclic, multi-directional dependencies and resolving them deterministically.
+  Conventional dataflow engines enforce strict Directed Acyclic Graphs (DAGs) and single-source updates. Circular dependencies or competing inputs cause infinite loops or stream crashes. RIVar introduces *constructive assignment*, natively supporting cyclic, multi-directional dependencies and resolving them deterministically.
 * **Why not classical Constraint Solvers?**  
   Traditional constraint satisfaction systems operate as monolithic, batch solvers that take over execution and obscure local state transitions. In contrast, RIVar operates over decentralized, event-driven streams, allowing flexible **merge policies** that negotiate conflicts directly with the user or agent in real time.
 
