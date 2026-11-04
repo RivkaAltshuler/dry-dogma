@@ -44,14 +44,18 @@ Amount := Dose * Duration
 
 This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression so that it propagates updates to it. Having several active assignments causes the variable to receive updates from multiple expressions, applying the classic merge operation over streams.
 
+```text
+Amount = Merge([updates from Concentration * Volume], [updates from Dose * Duration])
+```
 Each variable handles updates locally, discarding or accepting each value.
 
 ### The Protocol
-The mechanism used to manage these updates is called a "merge policy." To function as an error-detection and correction protocol, we identify three key cases:
+
+The merge function is executed locally by the variables, according to a *merging policy*. Basically, whenever a variable has an incoming update message it may accept or discard it. We identify three like *policies* to function as an error-detection and correction protocol:
 
 1. **Self Check (Normal Propagation):** Silently receiving updates where older values are naturally overridden by new input. Redundant data and notifications sent to the user upon updates also assist with self-monitoring.
-2. **Parity Check:** In cases where a variable receives conflicting values from distinct assignments, it signals an error and presents it to the user, confirming mutual agreement across overlapping constraints.
-3. **Rejection:** Rejecting input if it causes unresolvable conflicts. If an input leads a variable to discard values along the propagation path, the runtime cancels the entire input transaction. Updates are processed sequentially through standard execution stacks without complex parallel deadlocks.
+2. **Parity Check:** In cases where a variable receives conflicting values from distinct assignments, the accepted value holds an error.
+3. **Rejection:** Rejecting input if it causes conflicts. Updates are processed sequentially through standard execution stacks. Therefore a discard may be executed throwing an exception.
 
 ## Future Horizons: Chatform, Lanform, and Beyond
 
