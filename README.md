@@ -34,7 +34,7 @@ In information theory, reliable transmission across a noisy medium requires inte
 ### 3. Intentional Redundancy as a Runtime Protocol
 Instead of treating redundancy as duplicate data to be eliminated, we approach it as a first-class architectural protocol. By designing runtimes that can accept multiple, simultaneous declarations of state, we turn overlapping inputs into continuous parity checks. 
 
-This shifts the responsibility of consistency from manual developer discipline or rigid user inputs to an automated runtime protocol—one capable of propagation, validation, and structured conflict resolution without crashing the execution environment.
+This shifts the responsibility of consistency from manual developer discipline or rigid user inputs to an automated runtime protocol—one capable of propagation, validation, and structured conflict resolution.
 
 ## Enabling the Protocol: The RIVar Computational Model
 
