@@ -1,10 +1,8 @@
-# dry-dogma
-> **Escaping the DRY Dogma: Reactive Runtimes as Error-Correcting Protocols**
-> 
+# Escaping the DRY Dogma: Reactive Runtimes as Error-Correcting Protocols
+
 > *"Redundancy is a feature, not a bug — in noisy, agent-based (and human) communication."*
 
-
-## Motivation: From Agent Hallucinations to the Human-Machine Friction
+## Motivation: From Agent Hallucinations to Human-Machine Friction
 
 The emergence of AI agents—systems that "think" in natural language and attempt to emit rigid, formal representations without error—sheds fresh light on a longstanding challenge in computer science: the inherent friction and frustration between human cognition and rigid software interfaces.
 
@@ -12,8 +10,8 @@ When an LLM agent hallucinates, emits contradictory constraints, or fails to sat
 
 This dynamic exposes a fundamental divide between software engineering dogmas and natural communication practices:
 
-* **Classical Software Dogma (DRY & SSOT):** For decades, foundational programming paradigms have treated redundancy as an architectural sin. Single Source of Truth (SSOT) and Don’t Repeat Yourself (DRY) dictate that every concept must have an isolated, non-overlapping representation. Overlapping declarations are treated as bugs, race conditions, or illegal states.
-* **Natural & Human Practices:** In human collaboration—as well as in probabilistic agent reasoning—**redundancy is essential**. We naturally restate requirements from different angles, cross-reference figures, and verify mutual understanding through repetition and parity checks.
+- **Classical Software Dogma (DRY & SSOT):** For decades, foundational programming paradigms have treated redundancy as an architectural sin. Single Source of Truth (SSOT) and Don’t Repeat Yourself (DRY) dictate that every concept must have an isolated, non-overlapping representation. Overlapping declarations are treated as bugs, race conditions, or illegal states.
+- **Natural & Human Practices:** In human collaboration—as well as in probabilistic agent reasoning—**redundancy is essential**. We naturally restate requirements from different angles, cross-reference figures, and verify mutual understanding through repetition and parity checks.
 
 When formal software rejects redundancy, it forces the entire burden of precision and error prevention onto the human or the agent before execution even begins. If an agent or human introduces a slight cognitive misalignment, traditional runtimes either silently overwrite state or crash unpredictably.
 
@@ -31,31 +29,45 @@ Communication between natural-language systems (whether humans or generative AI 
 
 In information theory, reliable transmission across a noisy medium requires intentional redundancy (such as parity bits and checksums) paired with an error-correcting protocol. Applying this principle to software architecture, intentional redundancy provides the overlapping signals necessary to detect misunderstandings, trace semantic drift, and guide automated recovery.
 
-### 3. Intentional Redundancy as a Runtime Protocol
-Instead of treating redundancy as duplicate data to be eliminated, we approach it as a first-class architectural protocol. By designing runtimes that can accept multiple, simultaneous declarations of state, we turn overlapping inputs into continuous parity checks. 
+### 3. Reactive Programming for Error-Correcting Protocols
+The reactive programming paradigm provides high-level abstractions to declare data dependencies with automatic consistency. This framework can be utilized to build protocols that detect and resolve errors, effectively cleaning the communication channel—inspired by error correction mechanisms in network communication.
 
-This shifts the responsibility of consistency from manual developer discipline or rigid user inputs to an automated runtime protocol—one capable of propagation, validation, and structured conflict resolution.
+## Enabling the Protocol: Constructive Assignment
 
-## Enabling the Protocol: The RIVar Computational Model
+### Brief for Constructive Assignment
+Constructive assignment is a semantic model where variables can have several active assignments simultaneously. For example:
 
-To operationalize an error-correcting runtime without falling into the pitfalls of existing paradigms, we build upon the **RIVar** computational model:
+```text
+Amount := Concentration * Volume
+Amount := Dose * Duration
+```
 
-* **Why not traditional Reactive Programming (FRP)?**  
-  Conventional dataflow engines enforce strict Directed Acyclic Graphs (DAGs) and single-source updates. Circular dependencies or competing inputs cause infinite loops or stream crashes. RIVar introduces *constructive assignment*, natively supporting cyclic, multi-directional dependencies and resolving them deterministically.
-* **Why not classical Constraint Solvers?**  
-  Traditional constraint satisfaction systems operate as monolithic, batch solvers that take over execution and obscure local state transitions. In contrast, RIVar operates over decentralized, event-driven streams, allowing flexible **merge policies** that negotiate conflicts directly with the user or agent in real time.
+This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression so that it propagates updates to it. Having several active assignments causes the variable to receive updates from multiple expressions, applying the classic merge operation over streams.
 
-### The Three Operational Modes
-When overlapping inputs are introduced through this model, the runtime behaves across three deterministic states:
-1. **Propagation (Partial Input):** Deriving missing state automatically.
-2. **Parity Check (Consistent Redundancy):** Confirming mutual agreement across overlapping constraints.
-3. **Structured Rejection (Conflict Isolation):** Trapping contradictions and returning actionable diagnostic feedback without breaking the active stream.
+Each variable handles updates locally, discarding or accepting each value.
+
+### The Protocol
+The mechanism used to manage these updates is called a "merge policy." To function as an error-detection and correction protocol, we identify three key cases:
+
+1. **Self Check (Normal Propagation):** Silently receiving updates where older values are naturally overridden by new input. Redundant data and notifications sent to the user upon updates also assist with self-monitoring.
+2. **Parity Check:** In cases where a variable receives conflicting values from distinct assignments, it signals an error and presents it to the user, confirming mutual agreement across overlapping constraints.
+3. **Rejection:** Rejecting input if it causes unresolvable conflicts. If an input leads a variable to discard values along the propagation path, the runtime cancels the entire input transaction. Updates are processed sequentially through standard execution stacks without complex parallel deadlocks.
+
+## Future Horizons: Chatform, Lanform, and Beyond
+
+To bring these principles into practical engineering domains, our ongoing work focuses on realizing error-correcting reactive runtimes through two upcoming application paradigms:
+
+- **Chatform:** Building domain-driven models based on constructive assignment frameworks. Creating an MCP (Model Context Protocol) server that exposes the model. The server recognizes variables updated by the prompt and returns messages detailing cascading updates or rejections. Finally, testing and comparing interactions with and without model redundancy.
+
+
+- **LangForm:** Developing a Domain-Specific Language (DSL) that easily defines mutually dependent tokens, supported by a Language Server Protocol (LSP) implementation that enforces the protocol principles. Evaluated using IDE environments (such as Cursor or Windsurf) to test LLM code generation interacting in real-time with the LSP server. 
+
+We invite researchers, developers, and practitioners interested in reimagining software reliability and human-agent interaction to explore our repositories, collaborate on our open-source tools, and join us in moving beyond the DRY dogma.
 
 ## Foundations
 
-* **Published Research:** *Escaping the DAG Dogma: Toward Modular Reactive Architectures* (Rivka Altshuler & David H. Lorenz) — **ACM SIGPLAN SPLASH / Onward! 2026**.
+- **Published Research:** *Escaping the DAG Dogma: Toward Modular Reactive Architectures* (Rivka Altshuler & David H. Lorenz) — **ACM SIGPLAN SPLASH / Onward! 2026**.
 
   📄 [Paper on ACM Digital Library](https://doi.org/10.1145/3840586.3843206)
 
-* **Core Engine Repositories:** [RIVarX Organization](https://github.com/RIVarX) (implementations in C#, TypeScript, and JavaScript).
-
+- **Core Engine Repositories:** [RIVarX Organization](https://github.com/RIVarX) (implementations in C#, TypeScript, and JavaScript).
