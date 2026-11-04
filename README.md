@@ -47,7 +47,6 @@ This model handles variables and expressions as streams of values. In each assig
 ```text
 Amount = Merge([updates from Concentration * Volume], [updates from Dose * Duration])
 ```
-Each variable handles updates locally, discarding or accepting each value.
 
 ### The Protocol
 
