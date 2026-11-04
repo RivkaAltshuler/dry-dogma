@@ -14,8 +14,7 @@
             justify-content: flex-start;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
-            padding-bottom: 90px;
+            padding: 12px 20px 76px;
             box-sizing: border-box;
             font-weight: normal;
         }
@@ -28,13 +27,17 @@
             transform: translateX(-50%);
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
             background: rgba(18, 34, 58, 0.95);
-            padding: 10px 22px;
+            padding: 8px 14px;
             border-radius: 30px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.25);
             z-index: 1000;
+            max-width: calc(100vw - 16px);
+            width: max-content;
+            flex-wrap: nowrap;
+            justify-content: center;
         }
 
         .nav-btn {
@@ -70,17 +73,51 @@
             user-select: none;
         }
 
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .zoom-controls .nav-btn {
+            min-width: 34px;
+            padding: 6px 10px;
+        }
+
+        .zoom-slider {
+            width: 85px;
+            accent-color: #ffe800;
+            cursor: pointer;
+        }
+
+        .zoom-value {
+            min-width: 42px;
+            color: #ffe800;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        @media (max-width: 560px) {
+            .nav-controls {
+                width: calc(100vw - 16px);
+                flex-wrap: wrap;
+                row-gap: 8px;
+            }
+        }
+
         /* Slides Display */
         .slide {
             display: none;
             border: 1px dashed rgba(255, 255, 255, 0.4);
-            padding: 20px 30px;
+            padding: 14px 24px;
             border-radius: 12px;
             background: rgba(29, 59, 111, 0.5);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            width: 1050px;
+            width: min(1050px, 100%);
             flex-direction: column;
-            gap: 16px;
+            gap: 12px;
             box-sizing: border-box;
         }
 
@@ -88,34 +125,10 @@
             display: flex;
         }
 
-        .slide-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 6px;
-        }
-
-        h2 {
-            color: #ffe800;
-            margin: 0;
-            font-size: 25.5px;
-            font-weight: normal;
-        }
-
-        .step-badge {
-            background-color: #ffe800;
-            color: #1D3B6F;
-            font-weight: normal;
-            font-size: 16.5px;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        
         .content-flex {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 26px;
             width: 100%;
         }
 
@@ -124,7 +137,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 24px;
+            gap: 12px;
             width: 100%;
         }
 
@@ -132,7 +145,7 @@
         .ordering-form-container {
             border: 2px solid #ffffff;
             background-color: #1b365d;
-            padding: 10px 15px;
+            padding: 8px 12px;
             width: 48%;
             box-sizing: border-box;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -140,18 +153,18 @@
             color: #ffffff;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .grid-section {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            gap: 8px;
             box-sizing: border-box;
         }
         .grid-section:not(:last-child) {
             border-bottom: 1.5px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             margin-bottom: 2px;
         }
         .field-group {
@@ -173,7 +186,7 @@
             width: 100%;
             min-width: 0;
             padding: 4px 3px;
-            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.4);
             background-color: #152b4d;
             color: #ffffff;
             font-size: 16.5px;
@@ -205,7 +218,7 @@
             flex-direction: column;
             gap: 8px;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 22px;
+            font-size: clamp(16px, 2.2vw, 22px);
             letter-spacing: 0.5px;
             justify-content: center;
         }
@@ -216,14 +229,7 @@
             white-space: nowrap;
         }
 
-        /* הדגשת כל הנוסחה בעת חישוב */
-        .formula-line.active-formula {
-            color: #ffe800 !important;
-            font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 232, 0, 0.5);
-        }
-
-        /* הדגשת משתנה בודד שהתעדכן */
+        /* Highlight only the variable updated by a calculation */
         .hl-var {
             color: #ffe800;
             font-weight: bold;
@@ -235,17 +241,17 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 22px;
-            padding-top: 14px;
+            gap: 24px;
+            padding-top: 10px;
         }
         .stream-row {
             position: relative;
-            height: 26px;
+            height: 24px;
         }
         .stream-label {
             position: absolute;
             left: 0;
-            top: -18px;
+            top: -20px;
             font-size: 16.5px;
             font-weight: normal;
             color: #ffffff;
@@ -336,16 +342,78 @@
             border-top: 1px solid rgba(255, 255, 255, 0.3);
             margin: 4px 0;
         }
+
+        @media (max-height: 600px) {
+            body {
+                padding: 6px 8px 52px;
+            }
+
+            .slide {
+                padding: 10px 20px;
+                gap: 9px;
+            }
+
+            .content-flex {
+                gap: 22px;
+            }
+
+            .top-row {
+                min-height: 127px;
+            }
+
+            .ordering-form-container {
+                min-height: 127px;
+                padding: 7.5px 11.5px;
+                gap: 6px;
+            }
+
+            .grid-section {
+                gap: 7px;
+            }
+
+            .grid-section:not(:last-child) {
+                padding-bottom: 5px;
+                margin-bottom: 1px;
+            }
+
+            .field-label {
+                font-size: 14.5px;
+            }
+
+            .field-group input {
+                padding: 3px;
+                font-size: 16px;
+            }
+
+            .equations-panel {
+                gap: 6px;
+                font-size: clamp(14.5px, 2.2vw, 20px);
+            }
+
+            .marbles-wrapper {
+                gap: 20px;
+                padding-top: 8px;
+            }
+
+            .stream-row {
+                height: 22px;
+            }
+
+            .stream-label {
+                top: -19px;
+                font-size: 15px;
+            }
+
+            .nav-controls {
+                bottom: 4px;
+            }
+        }
     </style>
 </head>
 <body>
 
 <!-- SLIDE 0: Initial State -->
 <div class="slide">
-    <div class="slide-header">
-        <h2>Initial State: Before Inputs</h2>
-        <span class="step-badge" style="background-color: #ffffff; color: #1D3B6F;">Start</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -378,10 +446,6 @@
 
 <!-- SLIDE 1: Concentration Updated -->
 <div class="slide active">
-    <div class="slide-header">
-        <h2>Step 1: Setting Concentration Input</h2>
-        <span class="step-badge">t1</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -418,10 +482,6 @@
 
 <!-- SLIDE 2: Volume Updated -->
 <div class="slide">
-    <div class="slide-header">
-        <h2>Step 2: Setting Volume Input</h2>
-        <span class="step-badge">t2</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -458,10 +518,6 @@
 
 <!-- SLIDE 3: Calculating Drug via Formula 1 -->
 <div class="slide">
-    <div class="slide-header">
-        <h2>Step 3: Calculating Drug</h2>
-        <span class="step-badge">t3</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -477,7 +533,7 @@
                 </div>
             </div>
             <div class="equations-panel">
-                <div class="formula-line active-formula">Drug := Volume * Concentration</div>
+                <div class="formula-line"><span class="hl-var">Drug</span> := Volume * Concentration</div>
                 <div class="formula-line">Drug := Dose * Duration</div>
             </div>
         </div>
@@ -498,10 +554,6 @@
 
 <!-- SLIDE 4: Dose Updated -->
 <div class="slide">
-    <div class="slide-header">
-        <h2>Step 4: Setting Dose Input</h2>
-        <span class="step-badge">t4</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -538,10 +590,6 @@
 
 <!-- SLIDE 5: Duration Updated -->
 <div class="slide">
-    <div class="slide-header">
-        <h2>Step 5: Setting Duration Input</h2>
-        <span class="step-badge">t5</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -578,10 +626,6 @@
 
 <!-- SLIDE 6: Calculating Drug via Formula 2 -->
 <div class="slide">
-    <div class="slide-header">
-        <h2>Step 6: Calculating Drug</h2>
-        <span class="step-badge">t6</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -598,7 +642,7 @@
             </div>
             <div class="equations-panel">
                 <div class="formula-line">Drug := Volume * Concentration</div>
-                <div class="formula-line active-formula">Drug := Dose * Duration</div>
+                <div class="formula-line"><span class="hl-var">Drug</span> := Dose * Duration</div>
             </div>
         </div>
         <div class="marbles-wrapper">
@@ -618,10 +662,6 @@
 
 <!-- SLIDE 7: Direct Input to Drug -->
 <div class="slide">
-    <div class="slide-header">
-        <h2>Step 7: Setting Drug Input</h2>
-        <span class="step-badge">t7</span>
-    </div>
     <div class="content-flex">
         <div class="top-row">
             <div class="ordering-form-container">
@@ -658,24 +698,47 @@
 
 <!-- Navigation Bar -->
 <div class="nav-controls">
-    <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← Previous</button>
+    <button class="nav-btn" id="resetBtn" onclick="resetSlides()">↺ Reset</button>
     <div class="slide-counter" id="slideCounter">Slide 2 / 8</div>
     <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+    <div class="zoom-controls" aria-label="Slide size controls">
+        <button class="nav-btn" type="button" aria-label="Zoom out" onclick="adjustZoom(-5)">−</button>
+        <input class="zoom-slider" id="zoomSlider" type="range" min="60" max="140" step="5" value="100" aria-label="Slide size">
+        <button class="nav-btn" type="button" aria-label="Zoom in" onclick="adjustZoom(5)">+</button>
+        <output class="zoom-value" id="zoomValue" for="zoomSlider" aria-live="polite">100%</output>
+    </div>
 </div>
 
 <script>
     const slides = document.querySelectorAll('.slide');
-    const prevBtn = document.getElementById('prevBtn');
+    const resetBtn = document.getElementById('resetBtn');
     const nextBtn = document.getElementById('nextBtn');
     const slideCounter = document.getElementById('slideCounter');
+    const zoomSlider = document.getElementById('zoomSlider');
+    const zoomValue = document.getElementById('zoomValue');
     let currentIndex = 0;
+
+    function setZoom(value) {
+        const zoom = Math.min(Number(zoomSlider.max), Math.max(Number(zoomSlider.min), Number(value)));
+        zoomSlider.value = zoom;
+        zoomValue.value = `${zoom}%`;
+        slides.forEach((slide) => {
+            slide.style.zoom = `${zoom}%`;
+        });
+    }
+
+    function adjustZoom(amount) {
+        setZoom(Number(zoomSlider.value) + amount);
+    }
+
+    zoomSlider.addEventListener('input', () => setZoom(zoomSlider.value));
 
     function updateSlide() {
         slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === currentIndex);
         });
         slideCounter.textContent = `Slide ${currentIndex + 1} / ${slides.length}`;
-        prevBtn.disabled = currentIndex === 0;
+        resetBtn.disabled = currentIndex === 0;
         nextBtn.disabled = currentIndex === slides.length - 1;
     }
 
@@ -693,8 +756,17 @@
         }
     }
 
+    function resetSlides() {
+        currentIndex = 0;
+        updateSlide();
+    }
+
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
+        if (e.target instanceof HTMLInputElement || e.target instanceof HTMLButtonElement) {
+            return;
+        }
+
         if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
             nextSlide();
         } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
@@ -703,6 +775,7 @@
     });
 
     updateSlide();
+    setZoom(zoomSlider.value);
 </script>
 
 
