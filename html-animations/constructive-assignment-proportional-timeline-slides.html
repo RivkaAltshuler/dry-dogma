@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0073)file:///C:/Users/rivka.altshuler/Downloads/gemini-code-1793601158126.html -->
 <html lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <title>Constructive Assignment - Proportional Timeline Slides</title>
     <style>
@@ -462,6 +463,93 @@
 
             .nav-controls {
                 bottom: 4px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 8px 8px 112px;
+            }
+
+            .slide {
+                width: 100%;
+                padding: 12px 14px;
+            }
+
+            .top-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+            }
+
+            .ordering-form-container,
+            .equations-panel {
+                width: 100%;
+            }
+
+            .ordering-form-container {
+                padding: 8px 10px;
+                min-height: 0;
+            }
+
+            .top-row {
+                min-height: 0;
+            }
+
+            .field-label {
+                font-size: 14px;
+            }
+
+            .equations-panel {
+                font-size: clamp(14px, 4vw, 18px);
+                overflow-x: auto;
+            }
+
+            .content-flex {
+                gap: 22px;
+            }
+
+            .marbles-wrapper {
+                gap: 22px;
+            }
+
+            .stream-label {
+                font-size: 14px;
+            }
+
+            .marble {
+                width: 30px;
+                height: 30px;
+                font-size: 15px;
+            }
+
+            .calc-note {
+                font-size: 12px;
+            }
+
+            .nav-controls {
+                bottom: 8px;
+                padding: 8px 10px;
+                gap: 8px;
+                box-sizing: border-box;
+            }
+
+            .nav-btn {
+                min-height: 40px;
+                padding: 7px 12px;
+            }
+
+            .zoom-controls {
+                gap: 5px;
+            }
+
+            .zoom-slider {
+                width: clamp(70px, 22vw, 110px);
+                min-height: 40px;
+            }
+
+            .demo-note-dialog {
+                padding: 18px;
             }
         }
     </style>
