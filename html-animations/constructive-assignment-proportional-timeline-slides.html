@@ -270,20 +270,29 @@
 
         /* Equations Panel Styling */
         .equations-panel {
+            order: -1;
             width: 48%;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             font-family: 'Courier New', Courier, monospace;
             font-size: clamp(16px, 2.2vw, 22px);
             letter-spacing: 0.5px;
             justify-content: center;
+            padding: 10px 12px;
+            border: 1px solid rgba(140, 180, 230, 0.28);
+            border-left: 4px solid #6fa8e8;
+            border-radius: 6px;
+            background: #10233d;
+            box-sizing: border-box;
         }
 
         .formula-line {
-            color: #ffffff;
-            padding: 4px 6px;
+            color: #dceaff;
+            padding: 5px 8px;
             white-space: nowrap;
+            background: rgba(5, 15, 29, 0.48);
+            border-radius: 3px;
         }
 
         /* Highlight only the variable updated by a calculation */
@@ -775,8 +784,8 @@
             <div class="ordering-form-container">
                 <div class="grid-section">
                     <div class="field-group"><span class="field-label">Drug</span><input type="text" class="active-input" value="200"></div>
-                    <div class="field-group"><span class="field-label">Concentration</span><input type="text" value="0.5"></div>
-                    <div class="field-group"><span class="field-label">Volume</span><input type="text" value="100"></div>
+                    <div class="field-group"><span class="field-label">Concentration</span><input type="text" class="inactive" value=""></div>
+                    <div class="field-group"><span class="field-label">Volume</span><input type="text" class="inactive" value=""></div>
                 </div>
                 <div class="grid-section">
                     <div class="field-group"><span class="field-label">Dose</span><input type="text" value="20"></div>
@@ -811,12 +820,12 @@
             <div class="ordering-form-container">
                 <div class="grid-section">
                     <div class="field-group"><span class="field-label">Drug</span><input type="text" class="active-input" value="300"></div>
-                    <div class="field-group"><span class="field-label">Concentration</span><input type="text" value="0.5"></div>
-                    <div class="field-group"><span class="field-label">Volume</span><input type="text" value="100"></div>
+                    <div class="field-group"><span class="field-label">Concentration</span><input type="text" class="inactive" value=""></div>
+                    <div class="field-group"><span class="field-label">Volume</span><input type="text" class="inactive" value=""></div>
                 </div>
                 <div class="grid-section">
-                    <div class="field-group"><span class="field-label">Dose</span><input type="text" value="20"></div>
-                    <div class="field-group"><span class="field-label">Duration</span><input type="text" value="10"></div>
+                    <div class="field-group"><span class="field-label">Dose</span><input type="text" class="inactive" value=""></div>
+                    <div class="field-group"><span class="field-label">Duration</span><input type="text" class="inactive" value=""></div>
                     <div class="field-group"><span class="field-label">Rate</span><input type="text" class="inactive" value=""></div>
                 </div>
             </div>
@@ -862,8 +871,7 @@
     </section>
     <section class="demo-note-section" aria-labelledby="demoNoteScope">
         <h3 id="demoNoteScope">Scope</h3>
-        <p>Covering all the correct behavior in this scenario requires additional assignments.</p>
-        <p>In this example, bidirectional constraints may seem like the right choice from the start. This animation does not explain why the language does not use them; its purpose is only to illustrate and teach constructive assignment.</p>
+        <p>This small example uses only two assignments to make the basic idea easier to follow. It is not intended to cover every behavior or design question; broader working examples are available in <a href="https://github.com/RIVarX" target="_blank" rel="noopener noreferrer">RIVarX</a>.</p>
     </section>
     <button class="nav-btn" type="button" onclick="document.getElementById('demoNoteDialog').close()">Close</button>
 </dialog>
