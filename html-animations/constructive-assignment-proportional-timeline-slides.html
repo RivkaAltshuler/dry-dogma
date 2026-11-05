@@ -81,13 +81,18 @@
             font-size: 14px;
         }
 
+        .info-button {
+            min-width: 34px;
+            padding: 6px 10px;
+        }
+
         .zoom-controls .nav-btn {
             min-width: 34px;
             padding: 6px 10px;
         }
 
         .zoom-slider {
-            width: 85px;
+            width: 70px;
             accent-color: #ffe800;
             cursor: pointer;
         }
@@ -97,6 +102,57 @@
             color: #ffe800;
             font-weight: bold;
             text-align: center;
+        }
+
+        .demo-note-dialog {
+            width: min(560px, calc(100vw - 40px));
+            max-height: calc(100vh - 32px);
+            box-sizing: border-box;
+            overflow-y: auto;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 12px;
+            padding: 24px;
+            background: #12223a;
+            color: #ffffff;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+            line-height: 1.55;
+        }
+
+        .demo-note-dialog::backdrop {
+            background: rgba(0, 0, 0, 0.65);
+        }
+
+        .demo-note-dialog h2 {
+            margin: 0 0 12px;
+            color: #ffe800;
+            font-size: 22px;
+        }
+
+        .demo-note-dialog p {
+            margin: 0 0 12px;
+        }
+
+        .demo-note-section {
+            margin-top: 14px;
+            padding: 14px 16px 2px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .demo-note-section h3 {
+            margin: 0 0 8px;
+            color: #ffe800;
+            font-size: 17px;
+        }
+
+        .demo-note-dialog a {
+            color: #ffe800;
+        }
+
+        .demo-note-dialog .nav-btn {
+            display: block;
+            margin: 18px 0 0 auto;
         }
 
         @media (max-width: 560px) {
@@ -702,12 +758,27 @@
     <div class="slide-counter" id="slideCounter">Slide 2 / 8</div>
     <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
     <div class="zoom-controls" aria-label="Slide size controls">
+        <button class="nav-btn info-button" type="button" aria-label="About this demonstration" onclick="document.getElementById('demoNoteDialog').showModal()">ⓘ</button>
         <button class="nav-btn" type="button" aria-label="Zoom out" onclick="adjustZoom(-5)">−</button>
         <input class="zoom-slider" id="zoomSlider" type="range" min="60" max="140" step="5" value="100" aria-label="Slide size">
         <button class="nav-btn" type="button" aria-label="Zoom in" onclick="adjustZoom(5)">+</button>
         <output class="zoom-value" id="zoomValue" for="zoomSlider" aria-live="polite">100%</output>
     </div>
 </div>
+
+<dialog class="demo-note-dialog" id="demoNoteDialog" aria-labelledby="demoNoteTitle">
+    <h2 id="demoNoteTitle">About this demonstration and its scope</h2>
+    <section class="demo-note-section" aria-labelledby="demoNotePurpose">
+        <h3 id="demoNotePurpose">Purpose</h3>
+        <p>This animation is a simplified illustration to help explain constructive assignment.</p>
+    </section>
+    <section class="demo-note-section" aria-labelledby="demoNoteScope">
+        <h3 id="demoNoteScope">Scope and open question</h3>
+        <p>Covering all the correct behavior in this scenario requires additional assignments.</p>
+        <p>In this example, bidirectional constraints may seem like the right choice from the start. This animation does not explain why the language does not use them; its purpose is only to illustrate and teach constructive assignment.</p>
+    </section>
+    <button class="nav-btn" type="button" onclick="document.getElementById('demoNoteDialog').close()">Close</button>
+</dialog>
 
 <script>
     const slides = document.querySelectorAll('.slide');
