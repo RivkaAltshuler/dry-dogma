@@ -42,13 +42,11 @@ Drug := Concentration * Volume
 Drug := Dose * Duration
 ```
 
-This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression so that it propagates updates to it. Having several active assignments causes the variable to receive updates from multiple expressions, applying the classic merge operation over streams.
+This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression and receives its updates. With several active assignments, updates from their expressions are merged into the same variable. The [interactive animation](https://rivkaaltshuler.github.io/dry-dogma/html-animations/constructive-assignment-proportional-timeline-slides.html) illustrates how these per-assignment subscriptions produce that merge.
 
 ```text
 Drug = Merge([updates from Concentration * Volume], [updates from Dose * Duration])
 ```
-
-**Visual walkthrough:** [Follow the interactive timeline](https://rivkaaltshuler.github.io/dry-dogma/html-animations/constructive-assignment-proportional-timeline-slides.html) alongside this explanation. It shows how inputs arrive over time and how multiple active assignments can send updates to the same variable.
 
 ### The Protocol
 
