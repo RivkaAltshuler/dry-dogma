@@ -34,6 +34,8 @@ The reactive programming paradigm provides high-level abstractions to declare da
 
 ## Enabling the Protocol: Constructive Assignment
 
+For background on the broader reactive-architecture context, see [*Escaping the DAG Dogma: Toward Modular Reactive Architectures*](https://doi.org/10.1145/3840586.3843206).
+
 ### Brief for Constructive Assignment
 Constructive assignment is a semantic model where variables can have several active assignments simultaneously. For example:
 
