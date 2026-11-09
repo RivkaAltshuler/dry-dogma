@@ -1,6 +1,10 @@
 # Escaping the DRY Dogma: Reactive Runtimes as Error-Correcting Protocols
 
+> **What is the place of DRY in an era of AI-generated code?** As AI changes how software is written, should we rethink engineering principles shaped by the realities of manual development?
+>
 > *"Redundancy is a feature, not a bug — in noisy, agent-based (and human) communication."*
+
+Our earlier paper, [*Escaping the DAG Dogma: Toward Modular Reactive Architectures*](https://doi.org/10.1145/3840586.3843206), is motivated by modularity in reactive architectures. This project extends that line of work by exploring how reactive runtimes can use intentional redundancy to address the noise inherent in communication between people and software—a challenge made especially visible by AI-assisted coding.
 
 ## Motivation: From Agent Hallucinations to Human-Machine Friction
 
@@ -34,8 +38,6 @@ The reactive programming paradigm provides high-level abstractions to declare da
 
 ## Enabling the Protocol: Constructive Assignment
 
-For background on the broader reactive-architecture context, see [*Escaping the DAG Dogma: Toward Modular Reactive Architectures*](https://doi.org/10.1145/3840586.3843206).
-
 ### Brief for Constructive Assignment
 Constructive assignment is a semantic model where variables can have several active assignments simultaneously. For example:
 
@@ -62,10 +64,10 @@ The merge function is executed locally by the variables, according to a *merging
 
 To bring these principles into practical engineering domains, our ongoing work focuses on realizing error-correcting reactive runtimes through two upcoming application paradigms:
 
-- **Chatform:** Building domain-driven models based on constructive assignment frameworks. Creating an MCP (Model Context Protocol) server that exposes the model. The server recognizes variables updated by the prompt and returns messages detailing cascading updates or rejections. Finally, testing and comparing interactions with and without model redundancy.
+- **Chatform:** Building domain-driven models based on [constructive assignment](#enabling-the-protocol-constructive-assignment) frameworks. Creating an MCP (Model Context Protocol) server that exposes the model. The server recognizes variables updated by the prompt and returns messages detailing cascading updates or rejections. Finally, testing and comparing interactions with and without model redundancy.
 
 
-- **LangForm:** Developing a Domain-Specific Language (DSL) that easily defines mutually dependent tokens, supported by a Language Server Protocol (LSP) implementation that enforces the protocol principles. Evaluated using IDE environments (such as Cursor or Windsurf) to test LLM code generation interacting in real-time with the LSP server. 
+- **LangForm:** Developing a Domain-Specific Language (DSL) that easily defines mutually dependent tokens, supported by a Language Server Protocol (LSP) implementation that enforces the [protocol principles](#the-protocol). Evaluated using IDE environments (such as Cursor or Windsurf) to test LLM code generation interacting in real-time with the LSP server. 
 
 We invite researchers, developers, and practitioners interested in reimagining software reliability and human-agent interaction to explore our repositories, collaborate on our open-source tools, and join us in moving beyond the DRY dogma.
 
