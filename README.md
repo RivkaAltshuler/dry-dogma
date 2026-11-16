@@ -56,9 +56,9 @@ The `Merge` function is executed locally by each variable according to a predefi
 2. **Parity Check (Conflict Signaling):** When a variable receives conflicting values from distinct, overlapping assignments, the system detects a semantic misalignment. Instead of silently overwriting state, the variable flags a *parity violation*. The variable moves into an error state, retaining both the discrepancy metrics and the conflicting bounds to pinpoint exactly where the cognitive drift between the human/agent intent and the domain logic occurred.
 3. **Rejection (Strict Invalidation):** If an incoming update introduces an unresolvable contradiction that violates core system invariants, the merging policy denies the transaction. The runtime halts execution down that specific branch, discards the conflicting input sequentially through the standard execution stack, and throws a formal validation exception to force immediate correction at the source.
 
-## Applications (Under Development)
+## Applications
 
-For real world evaluation we think about two applications: Chatform and Langform.
+We explore the practical implications of this protocol through two applications currently under development: Chatform and Langform.
 
 - **Chatform:** Reactive Domain Models for LLM Interaction. Chatform reimagines how Generative AI interacts with structured business logic, exposing the reactive domain model via a **Model Context Protocol (MCP)** server.
 
