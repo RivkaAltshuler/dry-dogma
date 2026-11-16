@@ -1,12 +1,8 @@
-# Escaping the DRY Dogma: Reactive Runtimes as Error-Correcting Protocols
+# Reactive Runtimes as Error-Correcting Protocols
 
-> **What is the place of DRY in an era of AI-generated code?** As AI changes how software is written, should we rethink engineering principles shaped by the realities of manual development?
->
-> *"Redundancy is a feature, not a bug — in noisy, agent-based (and human) communication."*
+*"Redundancy is a feature, not a bug — in noisy, agent-based (and human) communication."*
 
-Our earlier paper, [*Escaping the DAG Dogma: Toward Modular Reactive Architectures*](https://doi.org/10.1145/3840586.3843206), is motivated by modularity in reactive architectures. This project extends that line of work by exploring how reactive runtimes can use intentional redundancy to address the noise inherent in communication between people and software—a challenge made especially visible by AI-assisted coding.
-
-## Motivation: From Agent Hallucinations to Human-Machine Friction
+## Motivation
 
 The emergence of AI agents—systems that "think" in natural language and attempt to emit rigid, formal representations without error—sheds fresh light on a longstanding challenge in computer science: the inherent friction and frustration between human cognition and rigid software interfaces.
 
@@ -17,59 +13,59 @@ This dynamic exposes a fundamental divide between software engineering dogmas an
 - **Classical Software Dogma (DRY & SSOT):** For decades, foundational programming paradigms have treated redundancy as an architectural sin. Single Source of Truth (SSOT) and Don’t Repeat Yourself (DRY) dictate that every concept must have an isolated, non-overlapping representation. Overlapping declarations are treated as bugs, race conditions, or illegal states.
 - **Natural & Human Practices:** In human collaboration—as well as in probabilistic agent reasoning—**redundancy is essential**. We naturally restate requirements from different angles, cross-reference figures, and verify mutual understanding through repetition and parity checks.
 
-When formal software rejects redundancy, it forces the entire burden of precision and error prevention onto the human or the agent before execution even begins. If an agent or human introduces a slight cognitive misalignment, traditional runtimes either silently overwrite state or crash unpredictably.
+## Our Approach
 
-**dry-dogma** challenges this convention: rather than forcing noisy, multi-perspective agents and humans into the mold of rigid, non-redundant state machines, we reframe the runtime itself as an **error-correcting channel** that treats intentional redundancy as a first-class reliability mechanism.
+### 1. Escape DRY
+Principles such as DRY (*Don't Repeat Yourself*) and code reuse principle have long been treated as universal virtues. In practice, they originated as practical heuristics to address a human limitation: the difficulty of maintaining manual consistency across codebases. 
 
-## Our Approach: From Historical Constraints to Error-Correcting Channels
-
-### 1. DRY and Low Coupling as Tooling-Imposed Constraints
-Principles such as DRY (*Don't Repeat Yourself*), code reuse, and loose coupling have long been treated as universal virtues. In practice, they originated as practical heuristics to address a human limitation: the difficulty of maintaining manual consistency across codebases. 
-
-Developers minimize duplication primarily to ensure that modifications can be made safely in a single location without manual synchronization errors. In the absence of runtime mechanisms capable of synchronizing overlapping representations automatically, eliminating redundancy was the only viable strategy. When runtime tooling can maintain semantic consistency across representations, redundancy ceases to be a liability.
-
-### 2. Human/Agent-Software Interaction as a Noisy Channel
+### 2. Noisy Channel
 Communication between natural-language systems (whether humans or generative AI agents) and formal software interfaces constitutes a **noisy communication channel** in the classic information-theoretic sense. 
 
-In information theory, reliable transmission across a noisy medium requires intentional redundancy (such as parity bits and checksums) paired with an error-correcting protocol. Applying this principle to software architecture, intentional redundancy provides the overlapping signals necessary to detect misunderstandings, trace semantic drift, and guide automated recovery.
-
 ### 3. Reactive Programming for Error-Correcting Protocols
-The reactive programming paradigm provides high-level abstractions to declare data dependencies with automatic consistency. This framework can be utilized to build protocols that detect and resolve errors, effectively cleaning the communication channel—inspired by error correction mechanisms in network communication.
+Handling the noisy channel should be approached similarly to information theory.
 
-## Enabling the Protocol: Constructive Assignment
+In information theory, reliable transmission across a noisy medium requires intentional redundancy (such as parity bits and checksums) paired with an error-correcting protocol. 
 
-### Brief for Constructive Assignment
-Constructive assignment is a semantic model where variables can have several active assignments simultaneously. For example:
+Likewise, reactive programming can be adressed to make an error detection and correction protocol.
+
+
+## Implementation Strategy
+
+
+### Constructive Assignment
+Constructive assignment is a semantic model in reactive programming where variables can have several active assignments simultaneously. For example:
 
 ```text
 Drug := Concentration * Volume
 Drug := Dose * Duration
 ```
 
-This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression and receives its updates. With several active assignments, updates from their expressions are merged into the same variable. The [interactive animation](https://rivkaaltshuler.github.io/dry-dogma/html-animations/constructive-assignment-proportional-timeline-slides.html) illustrates how these per-assignment subscriptions produce that merge.
+This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression and receives its updates. With several active assignments, updates from their expressions are `merged` into the same variable. 
 
 ```text
 Drug = Merge([updates from Concentration * Volume], [updates from Dose * Duration])
 ```
 
+To visualize the mechanism, see [this interactive animation](https://rivkaaltshuler.github.io/dry-dogma/html-animations/constructive-assignment-proportional-timeline-slides.html).
+
 ### The Protocol
 
-The merge function is executed locally by the variables, according to a *merging policy*. Basically, whenever a variable has an incoming update message it may accept or discard it. We identify three like *policies* to function as an error-detection and correction protocol:
+The `Merge` function is executed locally by each variable according to a predefined **merging policy** that governs whether incoming updates are committed, flagged, or rejected. By evaluating overlapping constraints, these policies transform the reactive runtime into an error-detection and correction protocol. We identify three distinct operational modes:
 
-1. **Self Check (Normal Propagation):** Silently receiving updates where older values are naturally overridden by new input. Redundant data and notifications sent to the user upon updates also assist with self-monitoring.
-2. **Parity Check:** In cases where a variable receives conflicting values from distinct assignments, the accepted value holds an error.
-3. **Rejection:** Rejecting input if it causes conflicts. Updates are processed sequentially through standard execution stacks. Therefore a discard may be executed throwing an exception.
+1. **Self-Check (Normal Propagation):** In the absence of conflicts, variables seamlessly ingest updates, where older states are naturally overridden by new inputs. The runtime utilizes this redundant data flow to dispatch automated telemetry and parity notifications back to the user or agent, facilitating continuous self-monitoring.
+2. **Parity Check (Conflict Signaling):** When a variable receives conflicting values from distinct, overlapping assignments, the system detects a semantic misalignment. Instead of silently overwriting state, the variable flags a *parity violation*. The variable moves into an error state, retaining both the discrepancy metrics and the conflicting bounds to pinpoint exactly where the cognitive drift between the human/agent intent and the domain logic occurred.
+3. **Rejection (Strict Invalidation):** If an incoming update introduces an unresolvable contradiction that violates core system invariants, the merging policy denies the transaction. The runtime halts execution down that specific branch, discards the conflicting input sequentially through the standard execution stack, and throws a formal validation exception to force immediate correction at the source.
 
-## Future Horizons: Chatform, Lanform, and Beyond
+## Applications (Under Development)
 
-To bring these principles into practical engineering domains, our ongoing work focuses on realizing error-correcting reactive runtimes through two upcoming application paradigms:
+For real world evaluation we think about two applications: Chatform and Langform.
 
-- **Chatform:** Building domain-driven models based on [constructive assignment](#enabling-the-protocol-constructive-assignment) frameworks. Creating an MCP (Model Context Protocol) server that exposes the model. The server recognizes variables updated by the prompt and returns messages detailing cascading updates or rejections. Finally, testing and comparing interactions with and without model redundancy.
+- **Chatform:** Reactive Domain Models for LLM Interaction. Chatform reimagines how Generative AI interacts with structured business logic, exposing the reactive domain model via a **Model Context Protocol (MCP)** server.
 
+- **LangForm:** Domain Specific Language designed with overlapping data with the tooling to handle the consistency. We find Langium as the correct tool as it provides the framework to both declare the syntax and Language Server Protocol that is used to provide suggestions and errors to the user. 
 
-- **LangForm:** Developing a Domain-Specific Language (DSL) that easily defines mutually dependent tokens, supported by a Language Server Protocol (LSP) implementation that enforces the [protocol principles](#the-protocol). Evaluated using IDE environments (such as Cursor or Windsurf) to test LLM code generation interacting in real-time with the LSP server. 
+  Both applications should be used with LLM. Chatform through the MCP protocol. Langform, LLM is used to generate code and LSP provides responses feeding back to the LLM.
 
-We invite researchers, developers, and practitioners interested in reimagining software reliability and human-agent interaction to explore our repositories, collaborate on our open-source tools, and join us in moving beyond the DRY dogma.
 
 ## Foundations
 
