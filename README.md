@@ -62,7 +62,7 @@ We explore the practical implications of this protocol through two applications 
 
 - **Chatform:** Reactive Domain Models for LLM Interaction. Chatform reimagines how Generative AI interacts with structured business logic, exposing the reactive domain model via a **Model Context Protocol (MCP)** server.
 
-- **LangForm:** Domain Specific Language designed with overlapping data with the tooling to handle the consistency. We find Langium as the correct tool as it provides the framework to both declare the syntax and Language Server Protocol that is used to provide suggestions and errors to the user. 
+- **Langform:** Domain Specific Language designed with overlapping data with the tooling to handle the consistency. We find Langium as the correct tool as it provides the framework to both declare the syntax and Language Server Protocol that is used to provide suggestions and errors to the user. 
 
   Both applications are designed to interact with LLMs. Chatform integrates via the MCP protocol. For Langform, an LLM generates the code, and the LSP feeds validation responses back to the LLM.
 
