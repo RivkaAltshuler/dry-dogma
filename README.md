@@ -19,8 +19,7 @@ In information theory, reliable transmission across a noisy medium requires inte
 
 ## Our Approach
 
-reactive programming can be adressed to make an error detection and correction protocol, simmilarly to as in information theory. 
-
+Reactive programming can serve as a protocol for error detection and correction, analogous to error-correcting codes in information theory.
 
 ### Constructive Assignment
 
