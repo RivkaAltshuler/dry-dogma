@@ -6,33 +6,24 @@
 
 The emergence of AI agents—systems that "think" in natural language and attempt to emit rigid, formal representations without error—sheds fresh light on a longstanding challenge in computer science: the inherent friction and frustration between human cognition and rigid software interfaces.
 
-When an LLM agent hallucinates, emits contradictory constraints, or fails to satisfy strict schema requirements, it is not merely demonstrating an AI flaw. It is mirroring a fundamental cognitive reality: **natural communication relies on multiple, interchangeable, and often overlapping perspectives to convey intent**.
+## Observation
 
-This dynamic exposes a fundamental divide between software engineering dogmas and natural communication practices:
+### 1. Redundancy
+A central tension between the two lies in how they handle repetition. Natural-language interaction is inherently redundant and ambiguous, whereas software engineering principles such as DRY (Don't Repeat Yourself) and code reuse treat redundancy as undesirable.
 
-- **Classical Software Dogma (DRY & SSOT):** For decades, foundational programming paradigms have treated redundancy as an architectural sin. Single Source of Truth (SSOT) and Don’t Repeat Yourself (DRY) dictate that every concept must have an isolated, non-overlapping representation. Overlapping declarations are treated as bugs, race conditions, or illegal states.
-- **Natural & Human Practices:** In human collaboration—as well as in probabilistic agent reasoning—**redundancy is essential**. We naturally restate requirements from different angles, cross-reference figures, and verify mutual understanding through repetition and parity checks.
+Yet these anti-redundancy principles originated as pragmatic heuristics for a specific human limitation: the difficulty of maintaining manual consistency across a codebase.
+
+### 2. Noisy Channel
+Communication between natural-language systems (whether humans or generative AI agents) and formal software interfaces constitutes a noisy channel in the classic information-theoretic sense.
+In information theory, reliable transmission across a noisy medium requires intentional redundancy—such as parity checks—paired with an error-correcting protocol to detect and resolve inconsistencies.
 
 ## Our Approach
 
-### 1. Escape DRY
-Principles in programming, such as DRY (Don't Repeat Yourself) and code reuse treat code redundancy as undesirable, yet they originated as pragmatic heuristics for a human limitation: maintaining manual consistency across a codebase.
-
-### 2. Noisy Channel
-Communication between natural-language systems (whether humans or generative AI agents) and formal software interfaces constitutes a noisy communication channel in the classic information-theoretic sense. 
-
-### 3. Reactive Programming for Error-Correcting Protocols
-Handling the noisy channel should be approached similarly to information theory.
-
-In information theory, reliable transmission across a noisy medium requires intentional redundancy (such as parity bits and checksums) paired with an error-correcting protocol. 
-
-Likewise, reactive programming can be adressed to make an error detection and correction protocol.
-
-
-## Implementation Strategy
+reactive programming can be adressed to make an error detection and correction protocol, simmilarly to as in information theory. 
 
 
 ### Constructive Assignment
+
 Constructive assignment is a semantic model in reactive programming where variables can have several active assignments simultaneously. For example:
 
 ```text
@@ -74,3 +65,4 @@ We explore the practical implications of this protocol through two applications 
   📄 [Paper on ACM Digital Library](https://doi.org/10.1145/3840586.3843206)
 
 - **Core Engine Repositories:** [RIVarX Organization](https://github.com/RIVarX) (implementations in C#, TypeScript, and JavaScript).
+- 
