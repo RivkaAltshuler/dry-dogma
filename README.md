@@ -4,18 +4,19 @@
 
 ## Motivation
 
-The emergence of AI agents—systems that "think" in natural language and attempt to emit rigid, formal representations without error—sheds fresh light on a longstanding challenge in computer science: the inherent friction and frustration between human cognition and rigid software interfaces.
+The emergence of AI agents—systems that reason in natural language while attempting to emit rigid, formal representations reliably—sheds fresh light on a longstanding challenge in computer science: the inherent friction between informal cognition and strict software interfaces.
 
 ## Observation
 
 ### Redundancy
-A central tension between the two lies in how they handle repetition. Natural-language interaction is inherently redundant and ambiguous, whereas software engineering principles such as DRY (Don't Repeat Yourself) and code reuse treat redundancy as undesirable.
+
+A central tension between the two lies in how they handle repetition. Natural-language interaction is inherently redundant and ambiguous, whereas software engineering principles such as DRY (*Don't Repeat Yourself*) and code reuse treat redundancy as undesirable.
 
 Yet these anti-redundancy principles originated as pragmatic heuristics for a specific human limitation: the difficulty of maintaining manual consistency across a codebase.
 
 ### Noisy Channel
-Communication between the two constitutes a noisy channel in the classic information-theoretic sense.
-In information theory, reliable transmission across a noisy medium requires intentional redundancy—such as parity checks—paired with an error-correcting protocol to detect and resolve inconsistencies.
+
+Communication between the two constitutes a noisy channel in the classic information-theoretic sense. In information theory, reliable transmission across a noisy medium requires intentional redundancy—such as parity checks—paired with an error-correcting protocol to detect and resolve inconsistencies.
 
 ## Our Approach
 
@@ -30,7 +31,7 @@ Drug := Concentration * Volume
 Drug := Dose * Duration
 ```
 
-This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression and receives its updates. With several active assignments, updates from their expressions are `merged` into the same variable. 
+This model handles variables and expressions as streams of values. In each assignment, the left-hand variable subscribes to the expression and receives its updates. With several active assignments, updates from their expressions are `merged` into the same variable.
 
 ```text
 Drug = Merge([updates from Concentration * Volume], [updates from Dose * Duration])
@@ -40,22 +41,20 @@ To visualize the mechanism, see [this interactive animation](https://rivkaaltshu
 
 ### The Protocol
 
-The `Merge` function is executed locally by each variable according to a predefined **merging policy** that governs whether incoming updates are committed, flagged, or rejected. By evaluating overlapping constraints, these policies transform the reactive runtime into an error-detection and correction protocol. We identify three distinct operational modes:
+The `Merge` function is executed locally by each variable according to a predefined **merging policy** that governs whether incoming updates are accepted, flagged, or rejected. By evaluating overlapping assignments, these policies allow the reactive runtime to operate as an error-detection and correction protocol. We identify three distinct operational modes:
 
-1. **Self-Check (Normal Propagation):** In the absence of conflicts, variables seamlessly ingest updates, where older states are naturally overridden by new inputs. The runtime utilizes this redundant data flow to dispatch automated telemetry and parity notifications back to the user or agent, facilitating continuous self-monitoring.
-2. **Parity Check (Conflict Signaling):** When a variable receives conflicting values from distinct, overlapping assignments, the system detects a semantic misalignment. Instead of silently overwriting state, the variable flags a *parity violation*. The variable moves into an error state, retaining both the discrepancy metrics and the conflicting bounds to pinpoint exactly where the cognitive drift between the human/agent intent and the domain logic occurred.
-3. **Rejection (Strict Invalidation):** If an incoming update introduces an unresolvable contradiction that violates core system invariants, the merging policy denies the transaction. The runtime halts execution down that specific branch, discards the conflicting input sequentially through the standard execution stack, and throws a formal validation exception to force immediate correction at the source.
+1. **Self-Check:** Incoming updates are accepted, override previous values, and propagate downstream. The updates are exposed back to the user or agent, enabling self-verification.
+2. **Error Feedback:** When a variable receives conflicting values from distinct, overlapping assignments, it exposes an error.
+3. **Rejection:** When an incoming update conflicts with existing active assignments, it is rejected. The variable retains its previous valid value, halts downstream propagation, and reports the rejection back to the source for correction.
 
 ## Applications
 
-We explore the practical implications of this protocol through two applications currently under development: Chatform and Langform.
+We explore the practical implications of this protocol through two applications currently under development: **Chatform** and **Langform**.
 
-- **Chatform:** Reactive domain models for LLM Interaction. Chatform reimagines how Generative AI interacts with structured business logic, exposing the reactive domain model via a **Model Context Protocol (MCP)** server.
+- **Chatform:** Exposes a reactive domain model via a **Model Context Protocol (MCP)** server, enabling an LLM to interact with structured business logic through partial or overlapping inputs while relying on the runtime for consistency checks and feedback.
+- **Langform:** A **Domain-Specific Language (DSL)** designed with overlapping constructs and consistency validation. Implemented using **Langium**, it defines both the language syntax and a **Language Server Protocol (LSP)** backend that returns validation diagnostics and suggestions—supporting both human authors and LLM-generated code.
 
-- **Langform:** **Domain Specific Language (DSL)** designed with overlapping data with the tooling to handle the consistency. We find **Langium** as the correct tool as it provides the framework to both declare the syntax and **Language Server Protocol (LSP)** that is used to provide suggestions and errors to the user. 
-
-  Both applications are designed to interact with LLMs. Chatform integrates via the MCP protocol. For Langform, an LLM generates the code, and the LSP feeds validation responses back to the LLM.
-
+Both applications close the feedback loop with an LLM: Chatform through direct MCP tool calls, and Langform by feeding LSP validation responses back to the generating model.
 
 ## Foundations
 
@@ -64,4 +63,3 @@ We explore the practical implications of this protocol through two applications 
   📄 [Paper on ACM Digital Library](https://doi.org/10.1145/3840586.3843206)
 
 - **Core Engine Repositories:** [RIVarX Organization](https://github.com/RIVarX) (implementations in C#, TypeScript, and JavaScript).
-- 
