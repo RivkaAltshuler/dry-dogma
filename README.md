@@ -14,7 +14,7 @@ A central tension between the two lies in how they handle repetition. Natural-la
 Yet these anti-redundancy principles originated as pragmatic heuristics for a specific human limitation: the difficulty of maintaining manual consistency across a codebase.
 
 ### Noisy Channel
-Communication between natural-language systems (whether humans or generative AI agents) and formal software interfaces constitutes a noisy channel in the classic information-theoretic sense.
+Communication between the two constitutes a noisy channel in the classic information-theoretic sense.
 In information theory, reliable transmission across a noisy medium requires intentional redundancy—such as parity checks—paired with an error-correcting protocol to detect and resolve inconsistencies.
 
 ## Our Approach
