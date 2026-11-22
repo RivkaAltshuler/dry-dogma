@@ -8,12 +8,12 @@ The emergence of AI agents—systems that "think" in natural language and attemp
 
 ## Observation
 
-### 1. Redundancy
+### Redundancy
 A central tension between the two lies in how they handle repetition. Natural-language interaction is inherently redundant and ambiguous, whereas software engineering principles such as DRY (Don't Repeat Yourself) and code reuse treat redundancy as undesirable.
 
 Yet these anti-redundancy principles originated as pragmatic heuristics for a specific human limitation: the difficulty of maintaining manual consistency across a codebase.
 
-### 2. Noisy Channel
+### Noisy Channel
 Communication between natural-language systems (whether humans or generative AI agents) and formal software interfaces constitutes a noisy channel in the classic information-theoretic sense.
 In information theory, reliable transmission across a noisy medium requires intentional redundancy—such as parity checks—paired with an error-correcting protocol to detect and resolve inconsistencies.
 
