@@ -16,10 +16,10 @@ This dynamic exposes a fundamental divide between software engineering dogmas an
 ## Our Approach
 
 ### 1. Escape DRY
-Principles such as DRY (*Don't Repeat Yourself*) and code reuse principle have long been treated as universal virtues. In practice, they originated as practical heuristics to address a human limitation: the difficulty of maintaining manual consistency across codebases. 
+Principles in programming, such as DRY (Don't Repeat Yourself) and code reuse treat code redundancy as undesirable, yet they originated as pragmatic heuristics for a human limitation: maintaining manual consistency across a codebase.
 
 ### 2. Noisy Channel
-Communication between natural-language systems (whether humans or generative AI agents) and formal software interfaces constitutes a **noisy communication channel** in the classic information-theoretic sense. 
+Communication between natural-language systems (whether humans or generative AI agents) and formal software interfaces constitutes a noisy communication channel in the classic information-theoretic sense. 
 
 ### 3. Reactive Programming for Error-Correcting Protocols
 Handling the noisy channel should be approached similarly to information theory.
